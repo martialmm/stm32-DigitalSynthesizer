@@ -10,6 +10,7 @@
 #include "oscillator.h"
 #include "user_interface.h"
 #include "envelope.h"
+#include "filter.h"
 
 
 typedef struct {
@@ -17,6 +18,7 @@ typedef struct {
 	Oscillator_t* oscillator;
 	UserInterface_t* userInterface;
 	Envelope_t* envelope;
+	Filter_t* filter;
 }Synthesizer_t;
 
 Synthesizer_t* createSynthesizer(void);

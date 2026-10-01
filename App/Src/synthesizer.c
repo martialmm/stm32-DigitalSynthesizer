@@ -93,10 +93,16 @@ static void updateSynthesizerParameters(Synthesizer_t* synthesizer){
 		float sustainPotentiometerFiltered = processAudioPotentiometer(synthesizer->userInterface, POT_ENV_SUSTAIN);
 		float releasePotentiometerFiltered = processAudioPotentiometer(synthesizer->userInterface, POT_ENV_RELEASE);
 
+		float cutoffFilterPotentiometerFiltered 		= processAudioPotentiometer(synthesizer->userInterface, POT_FILTER_CUTOFF);
+//		float resonanceFilterPotentiometerFiltered 		= processAudioPotentiometer(synthesizer->userInterface, POT_FILTER_RESONANCE);
+//		float envelopeAmountFilterPotentiometerFiltered = processAudioPotentiometer(synthesizer->userInterface, POT_FILTER_RESONANCE);
+
 		setEnvelopeAttackTime(synthesizer->envelope, convertNormalizedPotentiometerToTime(attackPotentiometerFiltered));
 		setEnvelopeDecayTime(synthesizer->envelope, convertNormalizedPotentiometerToTime(decayPotentiometerFiltered));
 		setEnvelopeSustainLevel(synthesizer->envelope, sustainPotentiometerFiltered);
 		setEnvelopeReleaseTime(synthesizer->envelope, convertNormalizedPotentiometerToTime(releasePotentiometerFiltered));
+
+		setCutoffFilter(synthesizer->filter, cutoffFilterPotentiometerFiltered);
 
 		scanWaveformsSwitches(synthesizer->userInterface);
 		HAL_ADC_Start_DMA(adcForPotentiometers, (uint32_t*)getPotentiometersADCConversionBuffer(synthesizer->userInterface), 3);
